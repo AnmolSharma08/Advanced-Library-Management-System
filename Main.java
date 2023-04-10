@@ -10,19 +10,19 @@ class login{
     String name,bra;
     String NAMEFILE="Name_database.txt";
     String AGEFILE="Age_database.txt";
-    ArrayList<String> nameStore=new ArrayList<>(5);
-    ArrayList<Integer> AgeStore=new ArrayList<>(5);
-    public void verification(){
-
-        nameStore.add(0,"Ajay");
-        nameStore.add(1,"Anmol");
-        nameStore.add(2,"Deepak");
-        nameStore.add(3,"Bhavishya");
-        AgeStore.add(0,21);
-        AgeStore.add(1,19);
-        AgeStore.add(2,19);
-        AgeStore.add(3,18);
-    }
+    /////////Pehle iski jarurat thi phir mene txt files me hi saara control de diya jab se iska patta saap /////////
+//    ArrayList<String> nameStore=new ArrayList<>(5);
+//    ArrayList<Integer> AgeStore=new ArrayList<>(5);
+//    public void verification(){
+//        nameStore.add(0,"Ajay");
+//        nameStore.add(1,"Anmol");
+//        nameStore.add(2,"Deepak");
+//        nameStore.add(3,"Bhavishya");
+//        AgeStore.add(0,21);
+//        AgeStore.add(1,19);
+//        AgeStore.add(2,19);
+//        AgeStore.add(3,18);
+//    }
 
     public void check(int c) throws IOException {
         this.c=c;
@@ -43,7 +43,8 @@ class login{
                     while ((nameLine=namedata.readLine()) != null){
                         if (nameLine.trim().equalsIgnoreCase(name)){
                             NAMEmatch=true;
-                            found=true;
+                            //isse islia comment out liya jisse jab tak age sahi na ho jab tak program run na ho...
+//                            found=true;
                             break;
                         }
                     }
@@ -57,6 +58,12 @@ class login{
                     if (NAMEmatch && AGEmatch){
                         System.out.println("Thank You for login back " + name + " , Welcome (●'◡'●)");
                         System.out.println();
+                    }
+
+                    //I write this because of bug , if i dont write this then my code will login in if i write wrong name but correct age . So i dont want this...
+                    if(NAMEmatch==false && AGEmatch){
+                        System.out.println("You have enter a wrong username and age , Either fill correctly or make new account!!!");
+                        System.exit(0);
                     }
                     namedata.close();
                     agedata.close();
@@ -98,7 +105,7 @@ class login{
                 System.out.println();
                 break;
             default:
-                System.out.println("Please Enter valid choice and re-run the code");
+                System.out.println("I know you have chull , but please enter option mentioned above!!!!");
                 System.exit(0);
         }
     }
@@ -169,6 +176,9 @@ class library extends login{
                 break;
             case 4:
                 System.exit(0);
+            default:
+                System.out.println("I know you have chull , but please enter option mentioned above!!!!");
+                System.out.println();
         }
     }
 
@@ -179,13 +189,13 @@ public class Main {
         int ch1,ch2;
         String tem1;
 
-        System.out.println("**************************************************WELCOME IN ADVANCED LIBRARY MANAGEMENT SYSTEM**************************************************");
+        System.out.println("*************************************************WELCOME IN ADVANCED LIBRARY MANAGEMENT SYSTEM*************************************************");
         System.out.println("Login Menu !!!");
         System.out.println("Press 1 for Sign In (If you register previously)");
         System.out.println("Press 2 for Sign Up (If you are new user)");
         ch1= s.nextInt();
         login user=new login();
-        user.verification();
+    //    user.verification();
         try {
             user.check(ch1);
         } catch (IOException e) {
